@@ -48,6 +48,7 @@ public class SeasonControllerIntegrationTest {
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertEquals(2, response.getBody().getId());
         assertEquals("Season Two", response.getBody().getName());
+        assertEquals(6, response.getBody().getEpisodes().size());
 
     }
 

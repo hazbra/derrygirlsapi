@@ -45,7 +45,7 @@ public class EpisodeControllerIntegrationTest {
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertEquals(3, response.getBody().getId());
         assertEquals("Episode Three", response.getBody().getName());
-        assertEquals("Season One", response.getBody().getSeason().getName());
+        assertEquals(1, response.getBody().getSeasonId());
         assertEquals("The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.", response.getBody().getDescription());
 
     }

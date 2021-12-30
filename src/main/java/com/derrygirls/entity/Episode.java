@@ -23,14 +23,13 @@ public class Episode {
     @Column(length = 2000)
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "season_id")
-    private Season season;
+    @JoinColumn(name = "season_id", nullable = false)
+    private long seasonId;
 
-    public Episode(long id, String name, String description, Season season) {
+    public Episode(long id, String name, String description, long season_id) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.season = season;
+        this.seasonId = season_id;
     }
 }

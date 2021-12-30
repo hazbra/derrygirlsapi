@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,8 +20,17 @@ public class Season {
     @Column(name = "season_name", nullable = false)
     private String name;
 
+    @OneToMany(mappedBy = "seasonId")
+    private List<Episode> episodes;
+
     public Season(long id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Season(long id, String name, List<Episode> episodes) {
+        this.id = id;
+        this.name = name;
+        this.episodes = episodes;
     }
 }

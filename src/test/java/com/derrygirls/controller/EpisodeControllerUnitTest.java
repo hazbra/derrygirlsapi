@@ -1,7 +1,6 @@
 package com.derrygirls.controller;
 
 import com.derrygirls.entity.Episode;
-import com.derrygirls.entity.Season;
 import com.derrygirls.exception.EpisodeNotFoundException;
 import com.derrygirls.service.EpisodeService;
 import org.junit.Test;
@@ -44,8 +43,7 @@ public class EpisodeControllerUnitTest {
 
     @Test
     public void getOneEpisode() throws Exception {
-        Season season = new Season(1, "Season One");
-        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", season);
+        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4);
         when(episodeService.findEpisode(1)).thenReturn(episode);
 
         mockMvc.perform(get("/derrygirls/episode/1").accept(MediaType.APPLICATION_JSON))
@@ -53,7 +51,7 @@ public class EpisodeControllerUnitTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.description", is("Funny stuff happens")))
-                .andExpect(jsonPath("$.season.name", is("Season One")));
+                .andExpect(jsonPath("$.seasonId", is(4)));
 
     }
 
