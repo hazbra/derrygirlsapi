@@ -3,6 +3,8 @@ package com.derrygirls.controller;
 import com.derrygirls.entity.Season;
 import com.derrygirls.exception.SeasonNotFoundException;
 import com.derrygirls.service.SeasonService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ import java.util.List;
 @RequestMapping("/derrygirls")
 public class SeasonController {
 
+    private static final Logger logger = LoggerFactory.getLogger(SeasonController.class);
+
     private SeasonService seasonService;
 
     @Autowired
@@ -25,6 +29,7 @@ public class SeasonController {
 
     @GetMapping("/seasons")
     public ResponseEntity<List<Season>> getAllSeasons() {
+        logger.info("Listing all seasons");
         List<Season> list = seasonService.listSeasons();
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -32,8 +37,10 @@ public class SeasonController {
     @GetMapping("/season/{id}")
     public ResponseEntity<Season> getSeason(@PathVariable("id") long id) {
         try {
+            logger.info("Finding season");
             return new ResponseEntity<>(seasonService.findSeason(id), HttpStatus.OK);
         } catch (SeasonNotFoundException exception) {
+            logger.error("Something went wrong", exception);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Season Not Found");
         }
     }
