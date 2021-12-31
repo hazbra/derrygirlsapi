@@ -2,8 +2,8 @@ package com.derrygirls.controller;
 
 import com.derrygirls.entity.Character;
 import com.derrygirls.entity.Episode;
-import com.derrygirls.exception.EpisodeNotFoundException;
-import com.derrygirls.service.EpisodeService;
+import com.derrygirls.exception.CharacterNotFoundException;
+import com.derrygirls.service.CharacterService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,55 +26,50 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(EpisodeController.class)
-public class EpisodeControllerUnitTest {
+@WebMvcTest(CharacterController.class)
+public class CharacterControllerUnitTest {
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    EpisodeService episodeService;
+    CharacterService characterService;
 
 
     @Test
-    public void getAllEpisodes() throws Exception {
-        mockMvc.perform(get("/derrygirls/episodes/"))
+    public void getAllCharacters() throws Exception {
+        mockMvc.perform(get("/derrygirls/characters/"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(content().json("[]"));
 
-        verify(episodeService, times(1)).listEpisodes();
+        verify(characterService, times(1)).listCharacters();
     }
 
     @Test
-    public void getOneEpisode() throws Exception {
-        Character character = new Character(1, "Clare Devlin");
-        Character character2 = new Character(2, "Jenny Joyce");
-        List<Character> characterList = new ArrayList<>();
-        characterList.add(character);
-        characterList.add(character2);
-        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4, characterList);
-        when(episodeService.findEpisode(1)).thenReturn(episode);
+    public void getOneCharacter() throws Exception {
+        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4);
+        Episode episode2 = new Episode(2, "Episode Two", "Funnier stuff happens", 4);
+        List<Episode> episodeList = new ArrayList<>();
+        episodeList.add(episode);
+        episodeList.add(episode2);
+        Character character = new Character(1, "Clare Devlin", episodeList);
+        when(characterService.findCharacter(1)).thenReturn(character);
 
-        mockMvc.perform(get("/derrygirls/episode/1").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/derrygirls/character/1").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.description", is("Funny stuff happens")))
-                .andExpect(jsonPath("$.seasonId", is(4)))
-                .andExpect(jsonPath("$.characters[0].name", is("Clare Devlin")))
-                .andExpect(jsonPath("$.characters[1].name", is("Jenny Joyce")));
-
+                .andExpect(jsonPath("$.name", is("Clare Devlin")));
     }
 
     @Test
-    public void getOneEpisodeException() throws Exception {
+    public void getOneCharacterException() throws Exception {
 
-        when(episodeService.findEpisode(75)).thenThrow(new EpisodeNotFoundException("Episode Not Found"));
+        when(characterService.findCharacter(75)).thenThrow(new CharacterNotFoundException("Character Not Found"));
 
-        mockMvc.perform(get("/derrygirls/episode/75" ))
+        mockMvc.perform(get("/derrygirls/character/75" ))
                 .andExpect(status().isNotFound())
-                .andExpect(status().reason("Episode Not Found"))
+                .andExpect(status().reason("Character Not Found"))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException));
-
     }
 }

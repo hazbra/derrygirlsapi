@@ -40,7 +40,7 @@ public class SeasonController {
             logger.info("Finding season");
             return new ResponseEntity<>(seasonService.findSeason(id), HttpStatus.OK);
         } catch (SeasonNotFoundException exception) {
-            logger.error("Something went wrong", exception);
+            logger.error("Something went wrong with season id {}", id, exception);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Season Not Found");
         }
     }

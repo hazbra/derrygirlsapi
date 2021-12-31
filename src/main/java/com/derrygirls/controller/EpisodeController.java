@@ -42,7 +42,7 @@ public class EpisodeController {
             logger.info("Finding episode");
             return new ResponseEntity<>(episodeService.findEpisode(id), HttpStatus.OK);
         } catch (EpisodeNotFoundException exception) {
-            logger.error("Something went wrong", exception);
+            logger.error("Something went wrong with episode id {}", id, exception);
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Episode Not Found");
         }
     }

@@ -1,6 +1,6 @@
 package com.derrygirls.controller;
 
-import com.derrygirls.entity.Episode;
+import com.derrygirls.entity.Character;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class EpisodeControllerIntegrationTest {
+public class CharacterControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
@@ -29,33 +29,28 @@ public class EpisodeControllerIntegrationTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getAllEpisodes() throws Exception {
+    public void getAllCharacters() throws Exception {
         ResponseEntity<List> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/episodes/", List.class);
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/characters/", List.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertEquals(12, response.getBody().size());
+        assertEquals(7, response.getBody().size());
     }
 
     @Test
-    public void getEpisode3() throws Exception {
-        ResponseEntity<Episode> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/episode/3/", Episode.class);
+    public void getCharacter3() throws Exception {
+        ResponseEntity<Character> response =
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/character/3/", Character.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertEquals(3, response.getBody().getId());
-        assertEquals("Episode Three", response.getBody().getName());
-        assertEquals(1, response.getBody().getSeasonId());
-        assertEquals("The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.", response.getBody().getDescription());
-        assertEquals(4, response.getBody().getCharacters().size());
-        assertEquals("Erin Quinn", response.getBody().getCharacters().get(0).getName());
-
+        assertEquals("Clare Devlin", response.getBody().getName());
     }
 
     @Test
-    public void shouldReturnEpisodeNotFound() throws Exception {
+    public void shouldReturnCharacterNotFound() throws Exception {
         ResponseEntity<String> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/episode/33/", String.class);
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/character/33/", String.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
     }
