@@ -39,7 +39,7 @@ public class EpisodeController {
     @GetMapping("/episode/{id}")
     public ResponseEntity<Episode> getEpisode(@PathVariable("id") long id) {
         try {
-            logger.info("Finding episode");
+            logger.info("Finding episode with id {}", id);
             return new ResponseEntity<>(episodeService.findEpisode(id), HttpStatus.OK);
         } catch (EpisodeNotFoundException exception) {
             logger.error("Something went wrong with episode id {}", id, exception);

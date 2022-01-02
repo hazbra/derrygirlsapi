@@ -1,6 +1,6 @@
 package com.derrygirls.controller;
 
-import com.derrygirls.entity.Character;
+import com.derrygirls.entity.Quote;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-public class CharacterControllerIntegrationTest {
+public class QuoteControllerIntegrationTest {
     @LocalServerPort
     private int port;
 
@@ -29,30 +29,28 @@ public class CharacterControllerIntegrationTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getAllCharacters() throws Exception {
+    public void getAllQuotes() throws Exception {
         ResponseEntity<List> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/characters/", List.class);
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/quotes/", List.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
-        assertEquals(7, response.getBody().size());
+        assertEquals(12, response.getBody().size());
     }
 
     @Test
-    public void getCharacter3() throws Exception {
-        ResponseEntity<Character> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/character/3/", Character.class);
+    public void getQuote3() throws Exception {
+        ResponseEntity<Quote> response =
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/quote/3/", Quote.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertEquals(3, response.getBody().getId());
-        assertEquals("Clare Devlin", response.getBody().getName());
-        assertEquals("Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!", response.getBody().getQuotes().get(0).getDescription());
-
+        assertEquals("Sure, what's a pair of knickers between cousins?", response.getBody().getDescription());
     }
 
     @Test
-    public void shouldReturnCharacterNotFound() throws Exception {
+    public void shouldReturnQuoteNotFound() throws Exception {
         ResponseEntity<String> response =
-                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/character/33/", String.class);
+                this.restTemplate.getForEntity("http://localhost:" + port + "/derrygirls/quote/33/", String.class);
 
         assertThat(response.getStatusCode(), equalTo(HttpStatus.NOT_FOUND));
     }

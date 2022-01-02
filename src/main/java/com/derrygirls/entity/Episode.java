@@ -27,6 +27,9 @@ public class Episode {
     @JoinColumn(name = "season_id", nullable = false)
     private long seasonId;
 
+    @OneToMany(mappedBy = "episodeId")
+    private List<Quote> quotes;
+
     @ManyToMany
     @JoinTable(
             name = "appears_in_episode",
@@ -41,11 +44,12 @@ public class Episode {
         this.seasonId = season_id;
     }
 
-    public Episode(long id, String name, String description, long season_id, List<Character> characters) {
+    public Episode(long id, String name, String description, long season_id, List<Character> characters, List<Quote> quotes) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.seasonId = season_id;
         this.characters = characters;
+        this.quotes = quotes;
     }
 }

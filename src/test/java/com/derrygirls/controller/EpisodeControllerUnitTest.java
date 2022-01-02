@@ -2,6 +2,7 @@ package com.derrygirls.controller;
 
 import com.derrygirls.entity.Character;
 import com.derrygirls.entity.Episode;
+import com.derrygirls.entity.Quote;
 import com.derrygirls.exception.EpisodeNotFoundException;
 import com.derrygirls.service.EpisodeService;
 import org.junit.Test;
@@ -52,7 +53,14 @@ public class EpisodeControllerUnitTest {
         List<Character> characterList = new ArrayList<>();
         characterList.add(character);
         characterList.add(character2);
-        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4, characterList);
+
+        Quote quote = new Quote(1, "A funny quote", 1, 9);
+        Quote quote2 = new Quote(1, "A funnier quote", 2, 9);
+        List<Quote> quoteList = new ArrayList<>();
+        quoteList.add(quote);
+        quoteList.add(quote2);
+
+        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4, characterList, quoteList);
         when(episodeService.findEpisode(1)).thenReturn(episode);
 
         mockMvc.perform(get("/derrygirls/episode/1").accept(MediaType.APPLICATION_JSON))
@@ -62,7 +70,9 @@ public class EpisodeControllerUnitTest {
                 .andExpect(jsonPath("$.description", is("Funny stuff happens")))
                 .andExpect(jsonPath("$.seasonId", is(4)))
                 .andExpect(jsonPath("$.characters[0].name", is("Clare Devlin")))
-                .andExpect(jsonPath("$.characters[1].name", is("Jenny Joyce")));
+                .andExpect(jsonPath("$.characters[1].name", is("Jenny Joyce")))
+                .andExpect(jsonPath("$.quotes[0].description", is("A funny quote")))
+                .andExpect(jsonPath("$.quotes[1].description", is("A funnier quote")));
 
     }
 

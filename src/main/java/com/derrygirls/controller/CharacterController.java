@@ -39,7 +39,7 @@ public class CharacterController {
     @GetMapping("/character/{id}")
     public ResponseEntity<Character> getCharacter(@PathVariable("id") long id) {
         try {
-            logger.info("Finding character");
+            logger.info("Finding character with id {}", id);
             return new ResponseEntity<>(characterService.findCharacter(id), HttpStatus.OK);
         } catch (CharacterNotFoundException exception) {
             logger.error("Something went wrong with character id {}", id, exception);

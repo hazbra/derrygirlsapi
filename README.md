@@ -1,6 +1,6 @@
 # Derry Girls API
 
-This project is a java api that contains information on episodes of the TV show Derry Girls
+This project is a (work in progress) java api that contains information on episodes of the TV show Derry Girls
 
 ## Build & Test
 
@@ -69,23 +69,54 @@ http://localhost:8080/derrygirls/episodes
 ```
 ### Show one episode by id
 ```bash
-http://localhost:8080/derrygirls/episode/6
+http://localhost:8080/derrygirls/episode/3
 {
-    "id": 6,
-    "name": "Episode Six",
-    "description": "Erin is over the moon when she becomes editor of the school magazine; Orla's obsessed by step aerobics; Da Gerry is in trouble with Ma Mary; There's romance for Aunt Sarah.",
+    "id": 3,
+    "name": "Episode Three",
+    "description": "The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.",
     "seasonId": 1,
-    "characters": [
+    "quotes": [
         {
-            "id": 1,
-            "name": "Erin Quinn"
+            "id": 8,
+            "description": "Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!",
+            "characterId": 3,
+            "episodeId": 3
         },
         {
+            "id": 11,
+            "description": "I just saw it too! The holy smirk, thanks be to God!",
+            "characterId": 2,
+            "episodeId": 3
+        },
+    ],
+    "characters": [
+        {
             "id": 2,
-            "name": "Orla McCool"
+            "name": "Orla McCool",
+            "quotes": [
+                {
+                    "id": 11,
+                    "description": "I just saw it too! The holy smirk, thanks be to God!",
+                    "characterId": 2,
+                    "episodeId": 3
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Clare Devlin",
+            "quotes": [
+                {
+                    "id": 8,
+                    "description": "Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!",
+                    "characterId": 3,
+                    "episodeId": 3
+                }
+            ]
         },
     ]
 }
+        
 ```
 ### Show all characters
 ```bash
@@ -96,7 +127,36 @@ http://localhost:8080/derrygirls/characters
 http://localhost:8080/derrygirls/character/1
 {
     "id": 1,
-    "name": "Erin Quinn"
+    "name": "Erin Quinn",
+    "quotes": [
+    {
+        "id": 1,
+        "description": "She's gone too far this time, Mammy. I mean, what next? Will I catch her trying on my knickers?",
+        "characterId": 1,
+        "episodeId": 1
+    },
+    {
+        "id": 5,
+        "description": "Macaulay Culkin isn't a Protestant, Ma.",
+        "characterId": 1,
+        "episodeId": 1
+    }
+    ]
+}
+```
+
+### Show all quotes
+```bash
+http://localhost:8080/derrygirls/quotes
+```
+### Show one quote by id
+```bash
+http://localhost:8080/derrygirls/quote/1
+{
+    "id": 1,
+    "description": "She's gone too far this time, Mammy. I mean, what next? Will I catch her trying on my knickers?",
+    "characterId": 1,
+    "episodeId": 1
 }
 ```
 

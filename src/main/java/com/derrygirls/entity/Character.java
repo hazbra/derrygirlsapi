@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Character {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="character_id")
@@ -25,15 +26,19 @@ public class Character {
     @ManyToMany(mappedBy = "characters")
     private List<Episode> episodes;
 
+    @OneToMany(mappedBy = "characterId")
+    private List<Quote> quotes;
+
 
     public Character(long id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Character(long id, String name, List<Episode> episodes) {
+    public Character(long id, String name, List<Episode> episodes, List<Quote> quote) {
         this.id = id;
         this.name = name;
         this.episodes = episodes;
+        this.quotes = quote;
     }
 }

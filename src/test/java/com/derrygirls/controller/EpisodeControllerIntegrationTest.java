@@ -47,8 +47,9 @@ public class EpisodeControllerIntegrationTest {
         assertEquals("Episode Three", response.getBody().getName());
         assertEquals(1, response.getBody().getSeasonId());
         assertEquals("The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.", response.getBody().getDescription());
-        assertEquals(4, response.getBody().getCharacters().size());
+        assertEquals(7, response.getBody().getCharacters().size());
         assertEquals("Erin Quinn", response.getBody().getCharacters().get(0).getName());
+        assertEquals(8, response.getBody().getQuotes().get(1).getId());
 
     }
 

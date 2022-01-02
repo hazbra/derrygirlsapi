@@ -37,7 +37,7 @@ public class SeasonController {
     @GetMapping("/season/{id}")
     public ResponseEntity<Season> getSeason(@PathVariable("id") long id) {
         try {
-            logger.info("Finding season");
+            logger.info("Finding season with id {}", id);
             return new ResponseEntity<>(seasonService.findSeason(id), HttpStatus.OK);
         } catch (SeasonNotFoundException exception) {
             logger.error("Something went wrong with season id {}", id, exception);

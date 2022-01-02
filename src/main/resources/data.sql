@@ -16,4 +16,19 @@ INSERT INTO character (character_id, character_name) VALUES (1, 'Erin Quinn'), (
 INSERT INTO appears_in_episode (episode_id, character_id) VALUES (1, 1), (2, 1), (3, 1), (4, 1), (5, 1), (6, 1), (7, 1), (8, 1), (9, 1), (10, 1), (11, 1), (12, 1),
                                                                  (1, 2), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 2), (9, 2), (10, 2), (11, 2), (12, 2),
                                                                  (1, 3), (2, 3), (3, 3), (4, 3), (5, 3), (6, 3), (7, 3), (8, 3), (9, 3), (10, 3), (11, 3), (12, 3),
-                                                                 (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4), (11, 4), (12, 4);
+                                                                 (1, 4), (2, 4), (3, 4), (4, 4), (5, 4), (6, 4), (7, 4), (8, 4), (9, 4), (10, 4), (11, 4), (12, 4),
+                                                                 (1, 5), (2, 5), (3, 5), (4, 5), (5, 5), (6, 5), (7, 5), (8, 5), (9, 5), (10, 5), (11, 5), (12, 5),
+                                                                 (1, 6), (2, 6), (3, 6), (4, 6), (5, 6), (6, 6), (7, 6), (8, 6), (9, 6), (10, 6), (11, 6), (12, 6),
+                                                                 (1, 7), (2, 7), (3, 7), (4, 7), (5, 7), (6, 7), (7, 7), (8, 7), (9, 7), (10, 7), (11, 7), (12, 7);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (1, 'She''s gone too far this time, Mammy. I mean, what next? Will I catch her trying on my knickers?', 1, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (2, 'Don''t say knickers in front of your father. He can''t cope.', 6, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (3, 'Sure, what''s a pair of knickers between cousins?', 7, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (4, 'Do you hear this? This''ll be someone she met at that stupid summer scheme you insisted we send her on. A bloody ''Friends Across the Barricades'' thing. I have nothing against Protestants. I''m all for integration, I am. But if they''re letting their wains divorce them', 6, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (5, 'Macaulay Culkin isn''t a Protestant, Ma.', 1, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (6, 'Well, I don''t know about the rest of you, but I''m not enjoying this bomb.', 7, 1);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (7, 'Yes I have. And for future reference, if any of you invite me to a study sleepover again, and I''m desperate enough to accept that invitation, there''s a good chance I have a litre bottle of Pernod in my bag.', 4, 3);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (8, 'Calm down? We''re still on William of Orange, Michelle! We haven''t so much looked at the famine!', 3, 3);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (9, 'Ach don''t talk to me. I was in bits last night. Didn''t even manage my Chinese. Poor Tonto.', 7, 3);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (10, 'Look, if you fail the exam, I promise you, there''ll be a nice wee plot out there with your name on it.', 6, 3);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (11, 'I just saw it too! The holy smirk, thanks be to God!', 2, 3);
+INSERT INTO quote (quote_id, description, character_id, episode_id) VALUES (12, 'Of course I have a point. We are the motherfucking children of Fatima, people!', 4, 3);
