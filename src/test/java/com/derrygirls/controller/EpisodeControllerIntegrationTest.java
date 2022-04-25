@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@AutoConfigureMockMvc
 public class EpisodeControllerIntegrationTest {
     @LocalServerPort
     private int port;
@@ -45,7 +44,6 @@ public class EpisodeControllerIntegrationTest {
         assertThat(response.getStatusCode(), equalTo(HttpStatus.OK));
         assertEquals(3, response.getBody().getId());
         assertEquals("Episode Three", response.getBody().getName());
-        assertEquals(1, response.getBody().getSeasonId());
         assertEquals("The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.", response.getBody().getDescription());
         assertEquals(7, response.getBody().getCharacters().size());
         assertEquals("Erin Quinn", response.getBody().getCharacters().get(0).getName());

@@ -33,7 +33,6 @@ http://localhost:8080/derrygirls/season/1
             "id": 1,
             "name": "Episode One",
             "description": "It's the early 90s, the first day of school and a terrible start for 16-year-old Erin as she wakes up to find her cousin Orla reading her diary; Granda Joe announces there's a bomb on the bridge.",
-            "seasonId": 1,
             "characters": [
                 {
                     "id": 1,
@@ -43,12 +42,12 @@ http://localhost:8080/derrygirls/season/1
                     "id": 2,
                     "name": "Orla McCool"
                 }
+            ]
         },
         {
             "id": 2,
             "name": "Episode Two",
             "description": "Everyone is really excited when Sister Michael announces the school trip to Paris; Back at the Quinn house, Uncle Colm is visiting and the whole family are losing the will to live.",
-            "seasonId": 1,
             "characters": [
                 {
                     "id": 1,
@@ -58,7 +57,7 @@ http://localhost:8080/derrygirls/season/1
                     "id": 2,
                     "name": "Orla McCool"
                 },
-          ]     
+           ]     
         }
     ]
 }
@@ -74,47 +73,26 @@ http://localhost:8080/derrygirls/episode/3
     "id": 3,
     "name": "Episode Three",
     "description": "The girls are tense about a big exam and naturally jump at a dubious opportunity to get out of it, especially as it involves spending time with the beautiful Father Peter.",
-    "seasonId": 1,
-    "quotes": [
-        {
-            "id": 8,
-            "description": "Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!",
-            "characterId": 3,
-            "episodeId": 3
-        },
-        {
-            "id": 11,
-            "description": "I just saw it too! The holy smirk, thanks be to God!",
-            "characterId": 2,
-            "episodeId": 3
-        },
-    ],
     "characters": [
         {
             "id": 2,
             "name": "Orla McCool",
-            "quotes": [
-                {
-                    "id": 11,
-                    "description": "I just saw it too! The holy smirk, thanks be to God!",
-                    "characterId": 2,
-                    "episodeId": 3
-                }
-            ]
         },
         {
             "id": 3,
             "name": "Clare Devlin",
-            "quotes": [
-                {
-                    "id": 8,
-                    "description": "Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!",
-                    "characterId": 3,
-                    "episodeId": 3
-                }
-            ]
         },
-    ]
+    ],
+     "quotes": [
+        {
+            "id": 8,
+            "description": "Calm down? We're still on William of Orange, Michelle! We haven't so much looked at the famine!"
+        },
+        {
+            "id": 11,
+            "description": "I just saw it too! The holy smirk, thanks be to God!"
+        },
+    ],
 }
         
 ```

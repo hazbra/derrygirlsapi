@@ -68,7 +68,6 @@ public class EpisodeControllerUnitTest {
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(1)))
                 .andExpect(jsonPath("$.description", is("Funny stuff happens")))
-                .andExpect(jsonPath("$.seasonId", is(4)))
                 .andExpect(jsonPath("$.characters[0].name", is("Clare Devlin")))
                 .andExpect(jsonPath("$.characters[1].name", is("Jenny Joyce")))
                 .andExpect(jsonPath("$.quotes[0].description", is("A funny quote")))
