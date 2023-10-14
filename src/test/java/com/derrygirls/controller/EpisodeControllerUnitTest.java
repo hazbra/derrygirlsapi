@@ -48,19 +48,7 @@ public class EpisodeControllerUnitTest {
 
     @Test
     public void getOneEpisode() throws Exception {
-        Character character = new Character(1, "Clare Devlin");
-        Character character2 = new Character(2, "Jenny Joyce");
-        List<Character> characterList = new ArrayList<>();
-        characterList.add(character);
-        characterList.add(character2);
-
-        Quote quote = new Quote(1, "A funny quote", 1, 9);
-        Quote quote2 = new Quote(1, "A funnier quote", 2, 9);
-        List<Quote> quoteList = new ArrayList<>();
-        quoteList.add(quote);
-        quoteList.add(quote2);
-
-        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4, characterList, quoteList);
+        Episode episode = createEpisode();
         when(episodeService.findEpisode(1)).thenReturn(episode);
 
         mockMvc.perform(get("/derrygirls/episode/1").accept(MediaType.APPLICATION_JSON))
@@ -82,8 +70,24 @@ public class EpisodeControllerUnitTest {
 
         mockMvc.perform(get("/derrygirls/episode/75" ))
                 .andExpect(status().isNotFound())
-                .andExpect(status().reason("Episode Not Found"))
+                .andExpect(status().reason("Episode 75 does not exist. You might want to think about wising up."))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException));
 
+    }
+
+    private static Episode createEpisode() {
+        Character character = new Character(1, "Clare Devlin");
+        Character character2 = new Character(2, "Jenny Joyce");
+        List<Character> characterList = new ArrayList<>();
+        characterList.add(character);
+        characterList.add(character2);
+
+        Quote quote = new Quote(1, "A funny quote", 1, 9);
+        Quote quote2 = new Quote(1, "A funnier quote", 2, 9);
+        List<Quote> quoteList = new ArrayList<>();
+        quoteList.add(quote);
+        quoteList.add(quote2);
+
+        return new Episode(1, "Episode One", "Funny stuff happens", 4, characterList, quoteList);
     }
 }

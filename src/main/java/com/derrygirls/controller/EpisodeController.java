@@ -8,10 +8,12 @@ import com.derrygirls.entity.Character;;
 import com.derrygirls.entity.Quote;
 import com.derrygirls.exception.EpisodeNotFoundException;
 import com.derrygirls.service.EpisodeService;
+import com.derrygirls.utils.DerryGirlsUtils;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,6 +35,9 @@ public class EpisodeController {
     private static final ModelMapper modelMapper = new ModelMapper();
 
     private EpisodeService episodeService;
+
+    @Value("${does.not.exist}")
+    public String defaultMessage;
 
 
     @Autowired
@@ -58,7 +63,8 @@ public class EpisodeController {
             return new ResponseEntity<>(episodeDTO, HttpStatus.OK);
         } catch (EpisodeNotFoundException exception) {
             logger.error("Something went wrong with episode id {}", id, exception);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Episode Not Found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    DerryGirlsUtils.addExceptionMessage(id, defaultMessage, "Episode"));
         }
     }
 

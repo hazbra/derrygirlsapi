@@ -4,10 +4,12 @@ import com.derrygirls.dto.SeasonDTO;
 import com.derrygirls.entity.Season;
 import com.derrygirls.exception.SeasonNotFoundException;
 import com.derrygirls.service.SeasonService;
+import com.derrygirls.utils.DerryGirlsUtils;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,6 +30,9 @@ public class SeasonController {
     private final ModelMapper modelMapper = new ModelMapper();
 
     private SeasonService seasonService;
+
+    @Value("${does.not.exist}")
+    public String defaultMessage;
 
     @Autowired
     public void setSeasonService(SeasonService seasonService) { this.seasonService = seasonService; }
@@ -50,7 +55,8 @@ public class SeasonController {
             return new ResponseEntity<>(seasonDTO, HttpStatus.OK);
         } catch (SeasonNotFoundException exception) {
             logger.error("Something went wrong with season id {}", id, exception);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Season Not Found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,
+                    DerryGirlsUtils.addExceptionMessage(id, defaultMessage, "Season"));
         }
     }
 

@@ -61,7 +61,7 @@ public class SeasonControllerUnitTest {
 
         mockMvc.perform(get("/derrygirls/season/75" ))
                 .andExpect(status().isNotFound())
-                .andExpect(status().reason("Season Not Found"))
+                .andExpect(status().reason("Season 75 does not exist. You might want to think about wising up."))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException));
 
     }

@@ -62,7 +62,7 @@ public class QuoteControllerUnitTest {
 
         mockMvc.perform(get("/derrygirls/quote/75" ))
                 .andExpect(status().isNotFound())
-                .andExpect(status().reason("Quote Not Found"))
+                .andExpect(status().reason("Quote 75 does not exist. You might want to think about wising up."))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException));
     }
 }

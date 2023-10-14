@@ -48,17 +48,7 @@ public class CharacterControllerUnitTest {
 
     @Test
     public void getOneCharacter() throws Exception {
-        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4);
-        Episode episode2 = new Episode(2, "Episode Two", "Funnier stuff happens", 4);
-        Quote quote = new Quote(1, "A funny quote", 1, 99);
-        Quote quote2 = new Quote(1, "A funnier quote", 1, 98);
-        List<Quote> quoteList = new ArrayList<>();
-        quoteList.add(quote);
-        quoteList.add(quote2);
-        List<Episode> episodeList = new ArrayList<>();
-        episodeList.add(episode);
-        episodeList.add(episode2);
-        Character character = new Character(1, "Clare Devlin", episodeList, quoteList);
+        Character character = createCharacter();
         when(characterService.findCharacter(1)).thenReturn(character);
 
         mockMvc.perform(get("/derrygirls/character/1").accept(MediaType.APPLICATION_JSON))
@@ -76,7 +66,24 @@ public class CharacterControllerUnitTest {
 
         mockMvc.perform(get("/derrygirls/character/75" ))
                 .andExpect(status().isNotFound())
-                .andExpect(status().reason("Character Not Found"))
+                .andExpect(status().reason("Character 75 does not exist. You might want to think about wising up."))
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof ResponseStatusException));
+    }
+
+    private static Character createCharacter() {
+        Episode episode = new Episode(1, "Episode One", "Funny stuff happens", 4);
+        Episode episode2 = new Episode(2, "Episode Two", "Funnier stuff happens", 4);
+
+        Quote quote = new Quote(1, "A funny quote", 1, 99);
+        Quote quote2 = new Quote(1, "A funnier quote", 1, 98);
+
+        List<Quote> quoteList = new ArrayList<>();
+        quoteList.add(quote);
+        quoteList.add(quote2);
+
+        List<Episode> episodeList = new ArrayList<>();
+        episodeList.add(episode);
+        episodeList.add(episode2);
+        return new Character(1, "Clare Devlin", episodeList, quoteList);
     }
 }
